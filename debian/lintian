@@ -1,0 +1,2 @@
+vyatta-cfg-dhcp-relay: file-in-unusual-dir
+vyatta-cfg-dhcp-relay: dir-or-file-in-opt

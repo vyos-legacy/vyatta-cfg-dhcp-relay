@@ -1,0 +1,5 @@
+vyatta-cfg-dhcp-relay (0.1) unstable; urgency=low
+
+  * Ported to vyatta-cfg-dhcp-relay
+
+ -- Marat Nepomnyashy <marat@vyatta.com>  Fri, 11 Jan 2008 17:54:10 -0800

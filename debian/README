@@ -1,0 +1,6 @@
+The Debian Package vyatta-cfg-dhcp-relay
+----------------------------
+
+This package has the Vyatta DHCP-relay-level configuration templates and scripts.
+
+ -- Marat Nepomnyashy <marat@vyatta.com>  2008-01-11

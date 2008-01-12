@@ -1,0 +1,83 @@
+#!/bin/bash
+
+ARGS=${@:2}
+
+# source the shared functions                                                                                                       
+. /etc/init.d/vyatta-functions
+
+PIDFILE=/var/run/dhcrelay.pid
+
+start() {
+	echo -n "Starting dhcrelay:  "
+	# progress_indicator "start" 
+	#pidfile is handled by exe
+	OUTPUT=`start-stop-daemon -m --pidfile $PIDFILE -b --start --exec /usr/bin/dhcrelay -- -d $ARGS 2>&1`
+	# progress_indicator "stop"
+	
+	PID=`cat $PIDFILE`
+	if [ -d "/proc/$PID" ]; then
+	  echo "OK"
+	else
+	  echo "ERR"
+	  exit 1
+	fi
+}
+
+stop() {
+	echo -n "Stopping dhcrelay:  "
+	# progress_indicator "start"
+
+        if [ -f "$PIDFILE" ]; then
+          PID=`cat $PIDFILE`
+          if [ -n "$PID" ]; then
+            OUTPUT=`start-stop-daemon -q --stop --pidfile $PIDFILE 2>&1`
+
+            while [ -d "/proc/$PID" ]; do
+              sleep 1
+            done
+          fi
+          rm -f $PIDFILE
+        fi
+	# progress_indicator "stop"
+	echo "OK"
+}
+
+restart () {
+	if [ -f "$PIDFILE" ]; then 
+	  PID=`cat $PIDFILE`
+	fi
+
+        if [ -n "$PID" ] && [ -d "/proc/$PID" ]; then
+          echo -n "Restarting dhcrelay:  "
+	  # progress_indicator "start"
+	  OUTPUT=`kill -HUP $PID`
+	  # progress_indicator "stop"
+	  echo "OK"
+	else
+ 	  start
+        fi
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		# note I am disabling restart because no sig will cause dnsmasq to re-read it's config file.
+		# this is not good since I think it loses it's cache file on complete restart.
+		# maybe we can fix this when we shift away from dnsmasq.  Hence I leave the original code
+		# in this file
+		# restart
+		;;
+	*)
+		echo "usage: $0 {start|stop|restart} configfile interface"
+		exit 1
+		;;
+esac
+
+exit 0
