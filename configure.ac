@@ -7,7 +7,7 @@ m4_define([VERSION_ID], [m4_esyscmd([
 	else
 	    echo -n 2.4
 	fi])])
-AC_INIT([vyatta-cfg-dhcp-server], VERSION_ID, [vyatta-support@vyatta.com])
+AC_INIT([vyatta-cfg-dhcp-relay], VERSION_ID, [vyatta-support@vyatta.com])
 
 test -n "$VYATTA_VERSION" || VYATTA_VERSION=$PACKAGE_VERSION
 
