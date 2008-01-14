@@ -2,16 +2,13 @@
 
 ARGS=${@:2}
 
-# source the shared functions                                                                                                       
-. /etc/init.d/vyatta-functions
-
 PIDFILE=/var/run/dhcrelay.pid
 
 start() {
 	echo -n "Starting dhcrelay:  "
 	# progress_indicator "start" 
 	#pidfile is handled by exe
-	OUTPUT=`start-stop-daemon -m --pidfile $PIDFILE -b --start --exec /usr/bin/dhcrelay -- -d $ARGS 2>&1`
+	OUTPUT=`start-stop-daemon -m --pidfile $PIDFILE -b --start --exec /usr/sbin/dhcrelay3 -- -d $ARGS 2>&1`
 	# progress_indicator "stop"
 	
 	PID=`cat $PIDFILE`
