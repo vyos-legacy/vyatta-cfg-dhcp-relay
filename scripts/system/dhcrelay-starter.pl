@@ -45,9 +45,19 @@ if ($vc->exists('.')) {
 				print stderr "DHCP relay configuration error.  DHCP relay interface with an empty name specified.\n";
 				$error = 1;
 			} else {
+				my $vif = undef;
+				if ($interface =~ /^.+\.\d+/) {
+					$interface =~ /(^.+)\.(\d+)/;
+					$interface = $1;
+					$vif = $2;
+				}
+
 				if (!$vcRoot->exists("interfaces ethernet $interface")) {
 					$error = 1;
 					print stderr "DHCP relay configuration error.  DHCP relay interface \"$interface\" specified has not been configured.\n";
+				} elsif (defined($vif) && length($vif) > 0 && !$vcRoot->exists("interfaces ethernet $interface vif $vif")) {
+					$error = 1;
+					print stderr "DHCP relay configuration error.  DHCP relay virtual interface number $vif specified for interface \"$interface\" has not been configured.\n";
 				}
 				$cmd_args .= " -i $interface";
 			}
