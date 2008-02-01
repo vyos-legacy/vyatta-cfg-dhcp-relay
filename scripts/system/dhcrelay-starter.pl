@@ -48,10 +48,26 @@ if ($vc->exists('.')) {
 				$vif = $2;
 			}
 
-			if (!$vcRoot->exists("interfaces ethernet $interface")) {
+			my $interface_type = undef;
+			if ($interface =~ /^eth\d+/) {
+				$interface_type = 'ethernet';
+			} elsif ($interface =~ /^ml\d+/) {
+				$interface_type = 'multilink';
+			} elsif ($interface =~ /^wan\d+/) {
+				$interface_type = 'serial';
+			} elsif ($interface =~ /^tun\d+/) {
+				$interface_type = 'tunnel';
+			}
+
+			if (!defined($interface_type)) {
+				$error = 1;
+				print stderr "DHCP relay configuration error.  Unable to determine type of interface \"$interface\".\n";
+			}
+
+			if (!$vcRoot->exists("interfaces $interface_type $interface")) {
 				$error = 1;
 				print stderr "DHCP relay configuration error.  DHCP relay interface \"$interface\" specified has not been configured.\n";
-			} elsif (defined($vif) && length($vif) > 0 && !$vcRoot->exists("interfaces ethernet $interface vif $vif")) {
+			} elsif (defined($vif) && length($vif) > 0 && !$vcRoot->exists("interfaces $interface_type $interface vif $vif")) {
 				$error = 1;
 				print stderr "DHCP relay configuration error.  DHCP relay virtual interface number $vif specified for interface \"$interface\" has not been configured.\n";
 			}
