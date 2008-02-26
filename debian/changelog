@@ -1,3 +1,25 @@
+vyatta-cfg-dhcp-relay (0.2) unstable; urgency=low
+
+  vc4.0.0
+  [ Mark O'Brien ]
+
+
+  [ An-Cheng Huang ]
+  * convert templates to new syntax
+
+  [ Marat Nepomnyashy ]
+  * Added checks to determine if the DHCP relay interface specified is a
+    vif, and if so, check that the vif has been configured.  Part of Bug
+    2473 fix.
+  * Do not require that at least one interface be specified.  Bug 2404
+    fix.
+  * Added checks for interfaces of type 'multilink', 'serial', and
+    'tunnel'.  Bug 2473 fix.
+
+  [ Mark O'Brien ]
+
+ -- Mark O'Brien <mobrien@vyatta.com>  Mon, 25 Feb 2008 17:37:57 -0800
+
 vyatta-cfg-dhcp-relay (0.1) unstable; urgency=low
 
   * Ported to vyatta-cfg-dhcp-relay
