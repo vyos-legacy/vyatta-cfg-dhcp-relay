@@ -7,13 +7,15 @@ Standards-Version: 3.7.2
 
 Package: vyatta-cfg-dhcp-relay
 Architecture: all
-Depends: bash (>= 3.1),
+Depends: vyatta-cfg,
+ vyatta-bash,
  vyatta-dhcp3-relay (>= 3.0.6.dfsg-1),
  sed (>= 4.1.5),
  perl (>= 5.8.8),
  libnetaddr-ip-perl (>= 4.007+dfsg-1),
  procps (>= 1:3.2.7-3),
  coreutils (>= 5.97-5.3),
- vyatta-cfg, busybox, sudo
-Description: Vyatta DHCP-relay-level configuration templates and scripts.
+ busybox,
+ sudo
+Description: Vyatta DHCP-relay-level configuration templates and scripts
  Vyatta DHCP-relay-level configuration templates and scripts.

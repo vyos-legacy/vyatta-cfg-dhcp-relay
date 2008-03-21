@@ -1,8 +1,6 @@
 cfgdir		 = $(datadir)/vyatta-cfg/templates
 
-bin_SCRIPTS =
 sbin_SCRIPTS =
-sysconf_DATA =
 
 sbin_SCRIPTS += scripts/system/dhcrelay.init
 sbin_SCRIPTS += scripts/system/dhcrelay-starter.pl
