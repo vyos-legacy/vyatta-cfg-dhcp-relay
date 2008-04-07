@@ -1,3 +1,3 @@
 type:  u32 
 default:  10
-help: hop count for relay options
+help: Set hop count for relay options

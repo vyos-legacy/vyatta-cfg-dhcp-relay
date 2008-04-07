@@ -1,2 +1,2 @@
 end:expression: "sudo /opt/vyatta/sbin/dhcrelay-starter.pl --init='/opt/vyatta/sbin/dhcrelay.init' 1>&2"
-help: DHCP relay configuration
+help: Configure Dynamic Host Configuration Protocol (DHCP) relay agent
