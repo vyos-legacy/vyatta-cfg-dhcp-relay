@@ -71,7 +71,11 @@ if ($vc->exists('.')) {
 				$error = 1;
 				print stderr "DHCP relay configuration error.  DHCP relay virtual interface number $vif specified for interface \"$interface\" has not been configured.\n";
 			}
-			$cmd_args .= " -i $interface";
+                        if (defined($vif)) {
+			   $cmd_args .= " -i $interface.$vif";
+                        } else {
+                           $cmd_args .= " -i $interface";
+			}
 		}
 	}
 
