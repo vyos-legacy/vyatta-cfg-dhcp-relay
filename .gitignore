@@ -8,6 +8,7 @@ config.status
 config.sub
 debian/vyatta-cfg-dhcp-relay
 debian/files
+debian/vyatta-cfg-dhcp-relay.debhelper.log
 config
 configure
 INSTALL
