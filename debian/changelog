@@ -1,3 +1,28 @@
+vyatta-cfg-dhcp-relay (0.10) unstable; urgency=low
+
+	  3.1.0
+  [ Mark O'Brien ]
+
+
+  [ Mohit Mehta ]
+  * adding the current version file for dhcp relay
+
+  [ rbalocca ]
+  * Ignore derived files
+
+  [ Mohit Mehta ]
+  * Fix Bug 3189 dhcprelay doesn't work with vlans
+
+  [ rbalocca ]
+  * Convert to our method of changelog creation
+
+  [ Mohit Mehta ]
+  * Fix Bug 3069 Help strings should be standardized
+
+  [ Mark O'Brien ]
+
+ -- Mark O'Brien <mobrien@firebolt.vyatta.com>  Tue, 17 Jun 2008 09:25:56 -0700
+
 vyatta-cfg-dhcp-relay (0.9) unstable; urgency=low
 
   3.0.5
