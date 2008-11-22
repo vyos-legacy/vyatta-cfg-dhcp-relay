@@ -13,9 +13,9 @@ my $modify_dir;
 my $init;
 GetOptions("change_dir=s" => \$change_dir, "modify_dir=s" => \$modify_dir, "init=s" => \$init);
 
-use VyattaConfig;
-my $vc = new VyattaConfig();
-my $vcRoot = new VyattaConfig();
+use Vyatta::Config;
+my $vc = new Vyatta::Config();
+my $vcRoot = new Vyatta::Config();
 
 if ($change_dir ne '') {
         $vc->{_changes_only_dir_base} = $change_dir;
