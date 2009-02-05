@@ -2,18 +2,19 @@
 
 use strict;
 use lib "/opt/vyatta/share/perl5/";
-
-
-my $error = 0;
-
-
+use Vyatta::Config;
+use Vyatta::Interface;
 use Getopt::Long;
+
 my $change_dir;
 my $modify_dir;
 my $init;
-GetOptions("change_dir=s" => \$change_dir, "modify_dir=s" => \$modify_dir, "init=s" => \$init);
 
-use Vyatta::Config;
+GetOptions("change_dir=s" => \$change_dir, 
+	   "modify_dir=s" => \$modify_dir, 
+	   "init=s" => \$init
+);
+
 my $vc = new Vyatta::Config();
 my $vcRoot = new Vyatta::Config();
 
@@ -36,47 +37,16 @@ if ($vc->exists('.')) {
 	}
 
 	my @interfaces = $vc->returnValues("interface");
-	foreach my $interface (@interfaces) {
-		if ($interface eq '') {
-			print stderr "DHCP relay configuration error.  DHCP relay interface with an empty name specified.\n";
-			$error = 1;
-		} else {
-			my $vif = undef;
-			if ($interface =~ /^.+\.\d+/) {
-				$interface =~ /(^.+)\.(\d+)/;
-				$interface = $1;
-				$vif = $2;
-			}
+	foreach my $ifname (@interfaces) {
+	    my $intf = new Vyatta::Interface($ifname);
+	    die  "DHCP relay configuration error." .
+	         "Unable to determine type of interface \"$ifname\".\n"
+		 unless $intf;
 
-			my $interface_type = undef;
-			if ($interface =~ /^eth\d+/) {
-				$interface_type = 'ethernet';
-			} elsif ($interface =~ /^ml\d+/) {
-				$interface_type = 'multilink';
-			} elsif ($interface =~ /^wan\d+/) {
-				$interface_type = 'serial';
-			} elsif ($interface =~ /^tun\d+/) {
-				$interface_type = 'tunnel';
-			}
+	    die "DHCP relay configuration error.  DHCP relay interface \"$ifname\" specified has not been configured.\n"
+		unless $vcRoot->exists($intf->path());
 
-			if (!defined($interface_type)) {
-				$error = 1;
-				print stderr "DHCP relay configuration error.  Unable to determine type of interface \"$interface\".\n";
-			}
-
-			if (!$vcRoot->exists("interfaces $interface_type $interface")) {
-				$error = 1;
-				print stderr "DHCP relay configuration error.  DHCP relay interface \"$interface\" specified has not been configured.\n";
-			} elsif (defined($vif) && length($vif) > 0 && !$vcRoot->exists("interfaces $interface_type $interface vif $vif")) {
-				$error = 1;
-				print stderr "DHCP relay configuration error.  DHCP relay virtual interface number $vif specified for interface \"$interface\" has not been configured.\n";
-			}
-                        if (defined($vif)) {
-			   $cmd_args .= " -i $interface.$vif";
-                        } else {
-                           $cmd_args .= " -i $interface";
-			}
-		}
+	    $cmd_args .= " -i " . $intf->name();
 	}
 
 	my $count = $vc->returnValue("relay-options hop-count");
@@ -96,23 +66,15 @@ if ($vc->exists('.')) {
 
 	my @servers = $vc->returnValues("server");
 	if (@servers == 0) {
-		print stderr "DHCP relay configuration error.  No DHCP relay server(s) configured.  At least one DHCP relay server required.\n";
-		$error = 1;
-	} else {
-		foreach my $server (@servers) {
-			if ($server eq '') {
-				print stderr "DHCP relay configuration error.  DHCP relay server with an empty name specified.\n";
-				$error = 1;
-			} else {
-				$cmd_args .= " $server";
-			}
-		}
-	}
-}
+	    die "DHCP relay configuration error.  No DHCP relay server(s) configured.  At least one DHCP relay server required.\n";
+	} 
 
-if ($error) {
-	print stderr "DHCP relay configuration commit aborted due to error(s).\n";
-	exit(1);
+	foreach my $server (@servers) {
+	    die "DHCP relay configuration error.  DHCP relay server with an empty name specified.\n"
+		if ($server eq '');
+
+	    $cmd_args .= " $server";
+	}
 }
 
 
