@@ -1,3 +1,13 @@
+vyatta-cfg-dhcp-relay (0.10.2) unstable; urgency=low
+
+  [ Stephen Hemminger ]
+  * Convert to use Vyatta::Interface
+  * Reindent
+
+  [ An-Cheng Huang ]
+
+ -- An-Cheng Huang <ancheng@vyatta.com>  Fri, 06 Mar 2009 13:03:47 -0800
+
 vyatta-cfg-dhcp-relay (0.10.1) unstable; urgency=low
 
   [ An-Cheng Huang ]
