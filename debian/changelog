@@ -1,3 +1,10 @@
+vyatta-cfg-dhcp-relay (0.10.4) unstable; urgency=low
+
+  * Fix Bz 4785 - dhcrelay forwards DHCPOFFER pkts from server to
+    255.255.255.255:0
+
+ -- Mohit Mehta <mohit.mehta@vyatta.com>  Tue, 08 Sep 2009 17:53:19 -0700
+
 vyatta-cfg-dhcp-relay (0.10.3) unstable; urgency=low
 
   * UNRELEASED
