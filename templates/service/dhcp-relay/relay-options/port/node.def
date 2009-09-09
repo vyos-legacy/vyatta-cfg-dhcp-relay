@@ -1,3 +1,2 @@
 type:  u32 
-default:  67
 help: Set port number for relay options
