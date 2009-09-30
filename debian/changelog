@@ -1,3 +1,9 @@
+vyatta-cfg-dhcp-relay (0.10.5) unstable; urgency=low
+
+  * Fix Bug 4674 Error configuring DHCP relay
+
+ -- Mohit Mehta <mohit.mehta@vyatta.com>  Tue, 29 Sep 2009 18:59:00 -0700
+
 vyatta-cfg-dhcp-relay (0.10.4) unstable; urgency=low
 
   * Fix Bz 4785 - dhcrelay forwards DHCPOFFER pkts from server to
