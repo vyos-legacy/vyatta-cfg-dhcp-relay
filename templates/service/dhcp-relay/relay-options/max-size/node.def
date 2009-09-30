@@ -1,3 +1,6 @@
 type:  u32 
 default:  576
-help: Set maximum size for relay options
+help: Set maximum packet size to send to a DHCPv4/BOOTP server
+syntax:expression: $VAR(@) >= 64 && $VAR(@) <= 1400; "max-size must be a value between 64 and 1400"
+comp_help:Possible completions:
+  <64-1400>           Set maximum packet size

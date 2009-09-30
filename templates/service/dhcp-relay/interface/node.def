@@ -1,3 +1,4 @@
 multi:
 type: txt
 help: Set DHCP relay interface
+allowed: /opt/vyatta/sbin/vyatta-interfaces.pl --show=all
