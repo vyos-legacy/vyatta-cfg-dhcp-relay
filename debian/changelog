@@ -1,3 +1,9 @@
+vyatta-cfg-dhcp-relay (0.10.6) unstable; urgency=low
+
+  * priority pushed to node.def
+
+ -- slioch <slioch@eng-140.vyatta.com>  Tue, 20 Oct 2009 16:13:51 -0700
+
 vyatta-cfg-dhcp-relay (0.10.5) unstable; urgency=low
 
   * Fix Bug 4674 Error configuring DHCP relay
