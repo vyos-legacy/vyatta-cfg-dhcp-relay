@@ -1,2 +1,3 @@
+priority: 910
 end:expression: "sudo /opt/vyatta/sbin/dhcrelay-starter.pl --init='/opt/vyatta/sbin/dhcrelay.init' 1>&2"
 help: Configure Dynamic Host Configuration Protocol (DHCP) relay agent
