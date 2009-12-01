@@ -1,3 +1,9 @@
+vyatta-cfg-dhcp-relay (0.10.8) unstable; urgency=low
+
+  * added required keyword to help text.
+
+ -- Michael Larson <slioch@slioch.vyatta.com>  Mon, 30 Nov 2009 16:23:47 -0800
+
 vyatta-cfg-dhcp-relay (0.10.7) unstable; urgency=low
 
   * dependency update
