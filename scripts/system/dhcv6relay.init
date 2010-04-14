@@ -1,0 +1,59 @@
+#!/bin/bash
+
+ARGS=${@:2}
+
+PIDFILE=/var/run/dhcv6relay.pid
+
+start() {
+	echo -n "Starting DHCPv6 Relay:  "
+	# progress_indicator "start" 
+	#pidfile is handled by exe
+	OUTPUT=`start-stop-daemon -m --pidfile $PIDFILE -b --start --exec /usr/sbin/dhcrelay3 -- -d -6 $ARGS 2>&1`
+	# progress_indicator "stop"
+	
+	PID=`cat $PIDFILE`
+	if [ -d "/proc/$PID" ]; then
+	  echo "OK"
+	else
+	  echo "ERR"
+	  exit 1
+	fi
+}
+
+stop() {
+	echo -n "Stopping DHCPv6 Relay:  "
+	# progress_indicator "start"
+
+        if [ -f "$PIDFILE" ]; then
+          PID=`cat $PIDFILE`
+          if [ -n "$PID" ]; then
+            OUTPUT=`start-stop-daemon -q --stop --pidfile $PIDFILE 2>&1`
+
+            while [ -d "/proc/$PID" ]; do
+              sleep 1
+            done
+          fi
+          rm -f $PIDFILE
+        fi
+	# progress_indicator "stop"
+	echo "OK"
+}
+
+case "$1" in
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	*)
+		echo "usage: $0 {start|stop|restart} args"
+		exit 1
+		;;
+esac
+
+exit 0

@@ -1,0 +1,112 @@
+##
+## **** License ****
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License version 2 as
+## published by the Free Software Foundation.
+##
+## This program is distributed in the hope that it will be useful, but
+## WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+## General Public License for more details.
+##
+## A copy of the GNU General Public License is available as
+## `/usr/share/common-licenses/GPL' in the Debian GNU/Linux distribution
+## or on the World Wide Web at `http://www.gnu.org/copyleft/gpl.html'.
+## You can also obtain it by writing to the Free Software Foundation,
+## Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
+## MA 02110-1301, USA.
+##
+## This code was originally developed by Vyatta, Inc.
+## Portions created by Vyatta are Copyright (C) 2010 Vyatta, Inc.
+## All Rights Reserved.
+##
+## Author: Bob Gilligan
+## Date: April 2010
+## Description: Input to generate Vyatta config templates for the DHCPv6 server
+##
+## **** End License ****
+
+##-----------------------------------------------------------------------------
+
+file: service/dhcpv6-relay/node.def
+
+help: Set DHCPv6 Relay Agent parameters
+
+end:
+	sudo /opt/vyatta/sbin/dhcv6relay-starter.pl --config_action \
+	    "$COMMIT_ACTION"
+
+##-----------------------------------------------------------------------------
+
+file: service/dhcpv6-relay/listen-interface/node.def
+
+tag:
+
+type: txt
+
+allowed: 
+	 local -a array
+         array=( /sys/class/net/* )
+         echo -n ${array[@]##*/}
+
+
+help: Set interface for DHCPv6 Relay Agent to listen for requests
+
+##-----------------------------------------------------------------------------
+
+file: service/dhcpv6-relay/listen-interface/node.tag/address/node.def
+
+type: ipv6
+
+help: Set IPv6 address on listen-interface listen for requests on
+##-----------------------------------------------------------------------------
+
+file: service/dhcpv6-relay/upstream-interface/node.def
+
+tag:
+
+type: txt
+
+allowed: 
+	 local -a array
+         array=( /sys/class/net/* )
+         echo -n ${array[@]##*/}
+
+help: Set interface for DHCPv6 Relay Agent forward requests out
+
+##-----------------------------------------------------------------------------
+
+file: service/dhcpv6-relay/upstream-interface/node.tag/address/node.def
+
+type: ipv6
+
+help: Set IPv6 address to forward requests to
+
+##-----------------------------------------------------------------------------
+
+file: service/dhcpv6-relay/max-hop-count/node.def
+
+type: u32
+
+syntax:expression: ($VAR(@) >= 1) && ($VAR(@) <= 255) ; "Must be between 1 and 255"
+
+help: Set maximum hop count for which requests will be processed
+
+##-----------------------------------------------------------------------------
+
+file: service/dhcpv6-relay/listen-port/node.def
+
+type: u32
+
+syntax:expression: ($VAR(@) >= 1) && ($VAR(@) <= 65535) ; "Must be between 1 and 65535"
+
+help: Set UDP port to listen for requests on
+
+##-----------------------------------------------------------------------------
+
+file: service/dhcpv6-relay/use-interface-id-option/node.def
+
+# This is a typeless node
+
+help: Enable use of the interface-ID DHCPv6 option
+
