@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Module: dhcpdv6-config.pl
+# Module: dhcv6relay-starter.pl
 #
 # **** License ****
 # This program is free software; you can redistribute it and/or modify
@@ -42,10 +42,12 @@ my $cmd_args = "";	# Args to startup script built up here.
 my $listen_set = 0;	# Number of listen interfaces set
 my $upstream_set = 0;	# Number of upstream interfaces set
 my $init_relay = "/opt/vyatta/sbin/dhcv6relay.init";	# Path to init script
+my $op_mode_flag;	# Indicates we are running in op mode if set.
 
 GetOptions(
     "debug"		=> \$debug_flag,
     "config_action=s"	=> \$config_action,
+    "op_mode"		=> \$op_mode_flag,
 );
 
 sub log_msg {
@@ -213,7 +215,12 @@ sub walk_tree {
     
     log_msg("in walk_tree at depth $depth level is: $level \n");
 
-    my @values = $vc->returnValues($level);
+    my @values ;
+    if ($op_mode_flag) {
+	@values = $vc->returnOrigValues($level);
+    } else {
+	@values = $vc->returnValues($level);
+    }
     my $num_values = scalar(@values);
     if ($num_values > 0) {
 	foreach my $value (sort (@values)) {
@@ -226,8 +233,12 @@ sub walk_tree {
 	log_msg("Push to: $level\n");
 	action_func($push_arr_ref, $level);
 
-	my @node_array = $vc->listNodes($level);
-
+	my @node_array;
+	if ($op_mode_flag) {
+	    @node_array = $vc->listOrigNodes($level);
+	} else {
+	    @node_array = $vc->listNodes($level);
+	}
 	foreach my $node (sort (@node_array)) {
 	    log_msg("node at depth $depth is $node\n");
 	    walk_tree ($vc, $level . " " . $node, $depth + 1, 
@@ -263,10 +274,20 @@ my $vcDHCP = new Vyatta::Config();
 
 # Walk the config tree
 # 
-if ($vcDHCP->exists('service dhcpv6-relay') ) {
+my $exists;
+if ($op_mode_flag) {
+    $exists=$vcDHCP->existsOrig('service dhcpv6-relay');
+} else {
+    $exists=$vcDHCP->exists('service dhcpv6-relay');
+}
+
+if ($exists) {
     $vcDHCP->setLevel('service dhcpv6-relay');
     log_msg("Initial call to walk_tree.\n");
     walk_tree($vcDHCP, "", 0, \@push_arr, \@pop_arr, \@leaf_arr);
+} else {
+    printf("DHCPv6 Relay Agent is not configured.\n");
+    exit 1;
 }
 
 # Start, or re-start the relay agent
