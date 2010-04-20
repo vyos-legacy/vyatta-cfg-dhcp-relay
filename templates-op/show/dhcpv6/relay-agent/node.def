@@ -1,3 +1,2 @@
-help: Show status of DHCPv6 Relay Agent
+help: Show information about the DHCPv6 Relay Agent
 
-run: sudo /opt/vyatta/sbin/dhcv6relay-status.pl
