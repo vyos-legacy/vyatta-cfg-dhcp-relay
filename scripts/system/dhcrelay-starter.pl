@@ -6,26 +6,13 @@ use Vyatta::Config;
 use Vyatta::Interface;
 use Getopt::Long;
 
-my $change_dir;
-my $modify_dir;
 my $init;
-
 GetOptions(
-    "change_dir=s" => \$change_dir,
-    "modify_dir=s" => \$modify_dir,
     "init=s"       => \$init
 );
 
 my $vc     = new Vyatta::Config();
 my $vcRoot = new Vyatta::Config();
-
-if ( $change_dir ne '' ) {
-    $vc->{_changes_only_dir_base} = $change_dir;
-}
-if ( $modify_dir ne '' ) {
-    $vc->{_new_config_dir_base} = $modify_dir;
-}
-
 my $cmd_args = "";
 
 $vc->setLevel('service dhcp-relay');
