@@ -1,3 +1,9 @@
+vyatta-cfg-dhcp-relay (0.10.15) unstable; urgency=low
+
+  * remove unused options
+
+ -- An-Cheng Huang <ancheng@vyatta.com>  Thu, 22 Jul 2010 11:56:41 -0700
+
 vyatta-cfg-dhcp-relay (0.10.14) unstable; urgency=low
 
   * remove verb usage at the start of help strings
