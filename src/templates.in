@@ -30,7 +30,7 @@
 
 file: service/dhcpv6-relay/node.def
 
-help: Set DHCPv6 Relay Agent parameters
+help: DHCPv6 Relay Agent parameters
 
 end:
 	sudo /opt/vyatta/sbin/dhcv6relay-starter.pl --config_action \
@@ -50,7 +50,7 @@ allowed:
          echo -n ${array[@]##*/}
 
 
-help: Set interface for DHCPv6 Relay Agent to listen for requests
+help: Interface for DHCPv6 Relay Agent to listen for requests
 
 ##-----------------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ file: service/dhcpv6-relay/listen-interface/node.tag/address/node.def
 
 type: ipv6
 
-help: Set IPv6 address on listen-interface listen for requests on
+help: IPv6 address on listen-interface listen for requests on
 ##-----------------------------------------------------------------------------
 
 file: service/dhcpv6-relay/upstream-interface/node.def
@@ -72,7 +72,7 @@ allowed:
          array=( /sys/class/net/* )
          echo -n ${array[@]##*/}
 
-help: Set interface for DHCPv6 Relay Agent forward requests out
+help: Interface for DHCPv6 Relay Agent forward requests out
 
 ##-----------------------------------------------------------------------------
 
@@ -80,7 +80,7 @@ file: service/dhcpv6-relay/upstream-interface/node.tag/address/node.def
 
 type: ipv6
 
-help: Set IPv6 address to forward requests to
+help: IPv6 address to forward requests to
 
 ##-----------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ type: u32
 
 syntax:expression: ($VAR(@) >= 1) && ($VAR(@) <= 255) ; "Must be between 1 and 255"
 
-help: Set maximum hop count for which requests will be processed
+help: Maximum hop count for which requests will be processed
 
 ##-----------------------------------------------------------------------------
 
@@ -100,7 +100,7 @@ type: u32
 
 syntax:expression: ($VAR(@) >= 1) && ($VAR(@) <= 65535) ; "Must be between 1 and 65535"
 
-help: Set UDP port to listen for requests on
+help: UDP port to listen for requests on
 
 ##-----------------------------------------------------------------------------
 
@@ -108,5 +108,5 @@ file: service/dhcpv6-relay/use-interface-id-option/node.def
 
 # This is a typeless node
 
-help: Enable use of the interface-ID DHCPv6 option
+help: Option to set DHCPv6 interface-ID option
 

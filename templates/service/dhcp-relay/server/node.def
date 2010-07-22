@@ -1,3 +1,3 @@
 multi:
 type:  ipv4
-help: Set DHCP server address
+help: DHCP server address

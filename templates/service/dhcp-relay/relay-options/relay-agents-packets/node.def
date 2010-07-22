@@ -1,6 +1,6 @@
 type:  txt 
 default:  "forward"
-help: Set to handle incoming DHCPv4 packets which already contain relay agent options
+help: Policy to handle incoming DHCPv4 packets which already contain relay agent options
 syntax:expression: $VAR(@) in "append", "replace", "forward", "discard";
                    "Valid options for relay-agents-packets are \"append\", \"replace\", \"forward\", or \"discard\""
 comp_help:Possible completions:
