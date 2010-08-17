@@ -1,5 +1,4 @@
 type:  u32 
 help: Port number to listen on
 syntax:expression: $VAR(@) >= 1 && $VAR(@) <= 65535; "port must be a value between 1 and 65535"
-comp_help:Possible completions:
-  <1-65535>           Set port to listen on
+val_help: u32:1-65535; Port to listen on
