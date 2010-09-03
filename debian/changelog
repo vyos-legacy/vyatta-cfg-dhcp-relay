@@ -1,3 +1,9 @@
+vyatta-cfg-dhcp-relay (0.10.18) unstable; urgency=low
+
+  * UNRELEASED
+
+ -- An-Cheng Huang <ancheng@vyatta.com>  Thu, 02 Sep 2010 18:27:59 -0700
+
 vyatta-cfg-dhcp-relay (0.10.17) unstable; urgency=low
 
   * update help text to use val_help
