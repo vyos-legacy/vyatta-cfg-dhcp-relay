@@ -30,6 +30,8 @@
 
 file: service/dhcpv6-relay/node.def
 
+priority: 900
+
 help: DHCPv6 Relay Agent parameters
 
 end:
