@@ -1,3 +1,9 @@
+vyatta-cfg-dhcp-relay (0.10.23) unstable; urgency=low
+
+  * new branch
+
+ -- Deepti Kulkarni <deepti@vyatta.com>  Sat, 03 Mar 2012 02:25:22 -0800
+
 vyatta-cfg-dhcp-relay (0.10.22) unstable; urgency=low
 
   * Add needed changes to dhcrelay-starter for operational mode restart
