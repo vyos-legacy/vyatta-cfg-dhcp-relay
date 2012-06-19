@@ -217,9 +217,17 @@ sub walk_tree {
 
     my @values ;
     if ($op_mode_flag) {
-	@values = $vc->returnOrigValues($level);
+        @values = $vc->returnOrigValues($level);
+        if (scalar(@values) < 1) {
+            my $tmp = $vc->returnOrigValue($level);
+            push @values, $tmp if defined $tmp;
+        }
     } else {
-	@values = $vc->returnValues($level);
+        @values = $vc->returnValues($level);
+        if (scalar(@values) < 1) {
+            my $tmp = $vc->returnValue($level);
+            push @values, $tmp if defined $tmp;
+        }
     }
     my $num_values = scalar(@values);
     if ($num_values > 0) {
