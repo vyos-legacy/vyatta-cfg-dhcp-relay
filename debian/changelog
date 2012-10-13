@@ -1,3 +1,9 @@
+vyatta-cfg-dhcp-relay (0.10.23+pacifica2) unstable; urgency=low
+
+  * new branch
+
+ -- John Southworth <john.southworth@vyatta.com>  Fri, 12 Oct 2012 18:46:06 -0700
+
 vyatta-cfg-dhcp-relay (0.10.23+pacifica1) unstable; urgency=low
 
   * new branch
