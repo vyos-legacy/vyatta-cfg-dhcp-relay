@@ -17,5 +17,5 @@ Depends: vyatta-cfg (>= 0.15.33),
  coreutils (>= 5.97-5.3),
  busybox,
  sudo
-Description: Vyatta DHCP-relay-level configuration templates and scripts
- Vyatta DHCP-relay-level configuration templates and scripts.
+Description: VyOS DHCP-relay-level configuration templates and scripts
+ VyOS DHCP-relay-level configuration templates and scripts.
