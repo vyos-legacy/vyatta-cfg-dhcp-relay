@@ -1,3 +1,9 @@
+vyatta-cfg-dhcp-relay (0.11.0+vyos2+current2) unstable; urgency=medium
+
+  * Use ISC DHCP relay instead of the vyatta version.
+
+ -- Daniil Baturin <daniil@baturin.org>  Wed, 27 Jan 2016 07:53:54 -0500
+
 vyatta-cfg-dhcp-relay (0.11.0+vyos2+current1) unstable; urgency=medium
 
   [ Thomas Jepp ]
