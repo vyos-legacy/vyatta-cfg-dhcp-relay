@@ -8,7 +8,7 @@ start() {
 	echo -n "Starting dhcrelay:  "
 	# progress_indicator "start" 
 	#pidfile is handled by exe
-	OUTPUT=`start-stop-daemon -m --pidfile $PIDFILE -b --start --exec /usr/sbin/dhcrelay3 -- -d $ARGS 2>&1`
+	OUTPUT=`start-stop-daemon -m --pidfile $PIDFILE -b --start --exec /usr/sbin/dhcrelay -- -d $ARGS 2>&1`
 	# progress_indicator "stop"
 	
 	PID=`cat $PIDFILE`
