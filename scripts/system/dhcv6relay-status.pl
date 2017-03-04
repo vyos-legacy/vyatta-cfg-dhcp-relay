@@ -58,7 +58,7 @@ if ($exists) {
     printf("DHCPv6 Relay Agent is not configured ");
 }
 
-my $ps_output=`ps -C dhcrelay3 -o args --no-headers`;
+my $ps_output=`ps -C dhcrelay -o args --no-headers`;
 
 my $running_count=0;
 

@@ -8,7 +8,7 @@ start() {
 	echo -n "Starting DHCPv6 Relay:  "
 	# progress_indicator "start" 
 	#pidfile is handled by exe
-	OUTPUT=`start-stop-daemon -m --pidfile $PIDFILE -b --start --exec /usr/sbin/dhcrelay3 -- -d -6 $ARGS 2>&1`
+	OUTPUT=`start-stop-daemon -m --pidfile $PIDFILE -b --start --exec /usr/sbin/dhcrelay -- -d -6 $ARGS 2>&1`
 	# progress_indicator "stop"
 	
 	PID=`cat $PIDFILE`
