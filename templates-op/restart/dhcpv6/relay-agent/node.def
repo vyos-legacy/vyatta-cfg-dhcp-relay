@@ -1,4 +1,0 @@
-help: Restart DHCPv6 relay agent
-
-run: sudo /opt/vyatta/sbin/dhcv6relay-starter.pl --op_mode \
-	--config_action ACTIVE
